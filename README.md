@@ -1,1 +1,1 @@
-# tactical-edge-ai-test-
+# tactical-edge-ai-test
