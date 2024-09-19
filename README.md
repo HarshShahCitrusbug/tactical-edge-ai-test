@@ -21,21 +21,30 @@ Before running this application, make sure you have:
 
 ## Setup
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone git@github.com:HarshShahCitrusbug/tactical-edge-ai-test.git
 cd tactical-edge-ai-test
 ```
 
-### 2. Setup Environment Variables
 
-Add the required environment variables mentioned in env.temp file.
+### Run the App 
+
+**Using Docker**
+
+1. Update the environment variables in the dockerfile
+
+```bash
+INDEX_NAME=<your-pinecone-index-name>
+EMBEDDING_DIMENSION=<dimension-of-embeddings>
+OPENAI_MODEL=<your-openai-model>
+PINECONE_API_KEY=<your-pinecone-api-key>
+OPENAI_API_KEY=<your-openai-api-key>
+```
 
 
-### 3. Running the App Using Docker
-
-* Build the Docker Image
+2. Build the Docker Image
 
 To build the Docker image, run:
 
@@ -43,7 +52,7 @@ To build the Docker image, run:
 docker build -t rag-chatbot-app .
 ```
 
-* Run the Docker Container
+3. Run the Docker Container
 
 To run the Docker container, use:
 
@@ -52,10 +61,38 @@ docker run -p 8501:8501 rag-chatbot-app
 ```
 
 
-### 3. Running the App Locally
+**Without Using Docker**
 
-To run the script locally use the following command:
+1. Create virtual environment
+
+Create and activate the virtual environment using the following commands:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+2. Install required dependencies
 
 ```bash
-    streamlit run app.py
+pip install -r requirements.txt
 ```
+
+3. Create a .env file in the root directory with the following variables
+
+```bash
+INDEX_NAME=<your-pinecone-index-name>
+EMBEDDING_DIMENSION=<dimension-of-embeddings>
+OPENAI_MODEL=<your-openai-model>
+PINECONE_API_KEY=<your-pinecone-api-key>
+OPENAI_API_KEY=<your-openai-api-key>
+```
+
+
+To run the script locally, use the following command:
+
+```bash
+streamlit run app.py
+```
+
+
+This README file provides detailed instructions for both Docker-based and local setups, including steps for environment variable configuration and application execution.
