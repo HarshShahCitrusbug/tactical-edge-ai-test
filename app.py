@@ -31,7 +31,16 @@ index = pinecone.Index(INDEX_NAME)
 
 def clear_pinecone_index():
     """Clear all vectors in the Pinecone index."""
-    index.delete(delete_all=True)
+
+    # Query the index to check if there are any vectors
+    index_stats = index.describe_index_stats()
+
+    # Check if the index contains any vectors
+    if index_stats['total_vector_count'] > 0:
+        index.delete(delete_all=True)
+        print("Index cleared.")
+    else:
+        print("Index is already empty. No need to clear.")
 
 
 def extract_text_from_pdf(pdf_file):
@@ -151,6 +160,7 @@ if __name__ == "__main__":
             st.session_state.file_uploaded = True
         else:
             st.session_state.chat_history = []
+            st.session_state.file_uploaded = False
 
         # Display chat messages
         for message in st.session_state.chat_history:
@@ -187,4 +197,5 @@ if __name__ == "__main__":
                 )
                 response_box.markdown(answer)
     except Exception as e:
+        print("Internal Error: ", e)
         st.error("There was an internal error")
