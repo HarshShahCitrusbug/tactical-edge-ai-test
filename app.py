@@ -4,6 +4,9 @@ import hashlib
 import streamlit as st
 from pinecone import Pinecone, ServerlessSpec
 from PyPDF2 import PdfReader
+from dotenv import load_dotenv
+
+load_dotenv()
 
 INDEX_NAME = os.getenv("INDEX_NAME")
 EMBEDDING_DIMENSION = int(os.getenv("EMBEDDING_DIMENSION"))
